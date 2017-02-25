@@ -27,6 +27,37 @@ func main() {
 	var err error
 	bot, err = linebot.New(os.Getenv("ChannelSecret"), os.Getenv("ChannelAccessToken"))
 	log.Println("Bot:", bot, " err:", err)
+	sess := session.Must(session.NewSession())
+
+svc := sqs.New(sess)
+
+params := &sqs.ReceiveMessageInput{
+    QueueUrl: aws.String("String"), // Required
+    AttributeNames: []*string{
+        aws.String("QueueAttributeName"), // Required
+        // More values...
+    },
+    MaxNumberOfMessages: aws.Int64(1),
+    MessageAttributeNames: []*string{
+        aws.String("MessageAttributeName"), // Required
+        // More values...
+    },
+    ReceiveRequestAttemptId: aws.String("String"),
+    VisibilityTimeout:       aws.Int64(1),
+    WaitTimeSeconds:         aws.Int64(1),
+}
+resp, err := svc.ReceiveMessage(params)
+
+if err != nil {
+    // Print the error, cast err to awserr.Error to get the Code and
+    // Message from an error.
+    fmt.Println(err.Error())
+    return
+}
+
+// Pretty-print the response data.
+fmt.Println(resp)
+	
 	http.HandleFunc("/callback", callbackHandler)
 	port := os.Getenv("PORT")
 	addr := fmt.Sprintf(":%s", port)
