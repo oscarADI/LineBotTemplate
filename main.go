@@ -44,15 +44,25 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
-
+/*
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+" OK!")).Do(); err != nil {
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
 					log.Print(err)
 				}
 			}
 		}
-	}
+	}*/
+	var messages []linebot.Message
+
+    // append some message to messages
+	
+	messages = "HI"
+    	_, err := bot.PushMessage(oscar1229, messages...).Do()
+    	if err != nil {
+		log.Print(err)
+        // Do something when some bad happened
+    	}
 }
