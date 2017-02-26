@@ -49,13 +49,13 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	var t0,t1 int
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
-			while true{
+			for _{
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
 				if(message.Text == "start") {t0 := time.Now()}
 				if(message.Text == "end") {
 					t1 := time.Now()
-					var n int := t1.Sub(t0)
+					int n := t1.Sub(t0)
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(strconv.Itoa(n))).Do(); err != nil {
 					log.Print(message.Text)}
 					break
@@ -65,4 +65,4 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-}
+
