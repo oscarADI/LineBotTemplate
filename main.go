@@ -28,6 +28,23 @@ func main() {
 	var err error
 	bot, err = linebot.New(os.Getenv("ChannelSecret"), os.Getenv("ChannelAccessToken"))
 	log.Println("Bot:", bot, " err:", err)
+	
+	http.HandleFunc("/cepave", func(w http.ResponseWriter, req *http.Request) {
+        req.ParseForm()
+        if req.Method == "GET" || req.Method == "POST" {
+            alert := req.FormValue("alert")
+	    
+        } else {
+            http.Error(w, "The method is not allowed.", http.StatusMethodNotAllowed)
+        }
+    })
+
+    err := http.ListenAndServe(":9000", nil)
+    if err != nil {
+        fmt.Println("ListenAndServe failed: ", err)
+    }
+	
+	
 	http.HandleFunc("/callback", callbackHandler)
 	port := os.Getenv("PORT")
 	addr := fmt.Sprintf(":%s", port)
@@ -45,20 +62,20 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
-	var t0,t1 int
 	for _, event := range events {
 
 		if event.Type == linebot.EventTypeMessage {
 			
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				if(message.Text == "start") {
+				/*if(message.Text == "start") {
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Test start.")).Do(); err != nil {
 					log.Print(message.Text)}
 					
 				}
-				if(message.Text == "end") {
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Test end.")).Do(); err != nil {
+				if(message.Text == "end") {*/
+				for n:=0;n<100;n++{
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Fuck you.")).Do(); err != nil {
 					log.Print(message.Text)}
 					
 				}
