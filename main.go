@@ -29,22 +29,6 @@ func main() {
 	bot, err = linebot.New(os.Getenv("ChannelSecret"), os.Getenv("ChannelAccessToken"))
 	log.Println("Bot:", bot, " err:", err)
 	
-	http.HandleFunc("/cepave", func(w http.ResponseWriter, req *http.Request) {
-        req.ParseForm()
-        if req.Method == "GET" || req.Method == "POST" {
-            alert := req.FormValue("alert")
-	    
-        } else {
-            http.Error(w, "The method is not allowed.", http.StatusMethodNotAllowed)
-        }
-    })
-
-    err := http.ListenAndServe(":9000", nil)
-    if err != nil {
-        fmt.Println("ListenAndServe failed: ", err)
-    }
-	
-	
 	http.HandleFunc("/callback", callbackHandler)
 	port := os.Getenv("PORT")
 	addr := fmt.Sprintf(":%s", port)
