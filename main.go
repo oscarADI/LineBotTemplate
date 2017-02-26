@@ -17,6 +17,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
@@ -51,7 +52,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			case *linebot.TextMessage:
 				for n:=0;n<60;n++{
 					if n==59{
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(n)).Do(); err != nil {
+						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(strconv.Itoa(n))).Do(); err != nil {
 					log.Print(message.Text)
 				}
 					}
