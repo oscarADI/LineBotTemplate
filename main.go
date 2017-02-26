@@ -49,7 +49,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	var t0,t1 int
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
-			for _{
+			for n:=0;;n++{
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
 				if(message.Text == "start") {t0 := time.Now()}
