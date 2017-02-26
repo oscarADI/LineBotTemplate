@@ -45,7 +45,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
-	var t0,t1
+	var t0,t1 int
 	for _, event := range events {
 		for n:=0;;n++{
 		if event.Type == linebot.EventTypeMessage {
@@ -60,7 +60,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				}
 				if(message.Text == "end") {
 					t1 := time.Now()
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Test end."+t1.sub(t0))).Do(); err != nil {
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Test end."+t1.Sub(t0))).Do(); err != nil {
 					log.Print(message.Text)}
 					
 				}
