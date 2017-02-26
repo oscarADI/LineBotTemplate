@@ -17,6 +17,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
@@ -46,23 +47,25 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for _, event := range events {
+		for n:=0;;n++{
 		if event.Type == linebot.EventTypeMessage {
 			
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
 				if(message.Text == "start") {
+					t0 := time.Now() 
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Test start.")).Do(); err != nil {
 					log.Print(message.Text)}
 					
 				}
 				if(message.Text == "end") {
-					
-					
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Test end.")).Do(); err != nil {
+					t1 := time.Now()
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Test end."+t1.sub(t0))).Do(); err != nil {
 					log.Print(message.Text)}
 					
 				}
 			}
+		}
 		}
 	}
 }
