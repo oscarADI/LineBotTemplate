@@ -52,13 +52,16 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			//for n:=0;;n++{
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				if(message.Text == "start") {t0 := time.Now()}
+				if(message.Text == "start") {
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Test start.").Do(); err != nil {
+					log.Print(message.Text)}
+					//t0 := time.Now()}
 				if(message.Text == "end") {
 					t1 := time.Now()
 					//var n int:= t1-t0
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(strconv.Itoa(t1.sub(t0)))).Do(); err != nil {
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Test end.").Do(); err != nil {
 					log.Print(message.Text)}
-					break
+					
 				}
 			}
 		}
