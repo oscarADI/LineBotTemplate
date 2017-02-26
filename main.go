@@ -17,8 +17,8 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strconv"
-	"time"
+	//"strconv"
+	//"time"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
