@@ -46,7 +46,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
-	var t0,t1;
+	var t0,t1 int
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
 			while 1{
