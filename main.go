@@ -56,6 +56,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Test start.")).Do(); err != nil {
 					log.Print(message.Text)}
 					//t0 := time.Now()}
+				}
 				if(message.Text == "end") {
 					t1 := time.Now()
 					//var n int:= t1-t0
@@ -68,4 +69,4 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-}
+
